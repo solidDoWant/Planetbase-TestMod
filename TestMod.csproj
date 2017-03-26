@@ -40,7 +40,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Assembly-CSharp">
-      <HintPath>T:\Steam Files\steamapps\common\Planetbase\Planetbase_Data\Managed\Assembly-CSharp.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Planetbase\Planetbase_Data\Managed\Assembly-CSharp.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -51,10 +51,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
     <Reference Include="UnityEngine">
-      <HintPath>T:\Steam Files\steamapps\common\Planetbase\Planetbase_Data\Managed\UnityEngine.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Planetbase\Planetbase_Data\Managed\UnityEngine.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-      <HintPath>T:\Steam Files\steamapps\common\Planetbase\Planetbase_Data\Managed\UnityEngine.UI.dll</HintPath>
+      <HintPath>..\..\..\..\..\Program Files (x86)\Steam\steamapps\common\Planetbase\Planetbase_Data\Managed\UnityEngine.UI.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -66,7 +66,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\PlanetbaseFramework\PlanetbaseFramework.csproj">
+    <ProjectReference Include="..\Planetbase-Framework\PlanetbaseFramework.csproj">
       <Project>{74541ff9-9e89-4a95-9c9d-8215bbface26}</Project>
       <Name>PlanetbaseFramework</Name>
     </ProjectReference>
