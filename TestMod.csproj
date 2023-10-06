@@ -80,7 +80,9 @@
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
-    <PostBuildEvent>copy $(TargetDir)$(TargetFileName) %25userprofile%25\Documents\Planetbase\Mods</PostBuildEvent>
+    <PostBuildEvent>$(SolutionDir)pdb2mdb.exe $(TargetPath)
+copy $(TargetPath).mdb "%25userprofile%25\Documents\Planetbase\Mods"
+copy $(TargetDir)$(TargetFileName) %25userprofile%25\Documents\Planetbase\Mods</PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
