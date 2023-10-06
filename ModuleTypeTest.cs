@@ -1,5 +1,6 @@
-﻿using Planetbase;
-using PlanetbaseFramework;
+﻿using System.Xml;
+using Planetbase;
+using PlanetbaseFramework.GameMechanics.Buildings;
 using UnityEngine;
 
 namespace TestMod
@@ -9,11 +10,12 @@ namespace TestMod
     // a "strings" (localization) lookup for the class suffix. For example, the in-game name of this module will be
     // "Test module", which is determined by getting the class name suffix ("Test"), converting it to lower case ("test"),
     // and looking up the corresponding string which is set in assets/strings/testmod_en.xml.
-    class ModuleTypeTest : BaseModuleType
+    class ModuleTypeTest : BaseModuleType, ICustomModuleProvider
     {
         public ModuleTypeTest(Texture2D icon, GameObject[] models) : base(icon, models)
         {
-            mPowerGeneration = -1000;                               // How much power each module instance produces (positive value) or consumes (negative value)
+            mPowerGeneration = 1000;                                // How much power each module instance produces (positive value) or consumes (negative value)
+            mOxygenGeneration = 10;                                 // How much oxygen each module instance produces (positive value) or consumes (negative value)
             mExterior = false;                                      // Colonist can walk in interior structures
             mHeight = 1f;
             mRequiredStructure.set<ModuleTypeOxygenGenerator>();    // This controls what structure is required to be built before this one may be placed
@@ -31,6 +33,16 @@ namespace TestMod
             resources.add(TypeList<ResourceType, ResourceTypeList>.find<Bioplastic>(), adjustedSizeIndex * 3);
 
             return resources;
+        }
+
+        public Module Create(Vector3 position, int sizeIndex)
+        {
+            return BaseModule.Create(position, sizeIndex, this, new ModuleTest());
+        }
+
+        public Module Create(XmlNode node)
+        {
+            return BaseModule.Create(node, new ModuleTest());
         }
     }
 }
