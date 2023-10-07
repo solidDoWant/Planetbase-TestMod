@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using Planetbase;
 using PlanetbaseFramework;
 using PlanetbaseFramework.GameMechanics.Buildings;
@@ -8,7 +9,9 @@ namespace TestMod
 {
     public class TestMod : ModBase
     {
+        public const string AssemblyVersion = "1.0.0.0";    // This is declared as a const so that it can be referenced in AssemblyInfo.cs annotations
         public override string ModName => "Test mod";
+        public override Version ModVersion => new Version(AssemblyVersion);
 
         public override void Init()
         {
