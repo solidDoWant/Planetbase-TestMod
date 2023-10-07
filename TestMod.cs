@@ -45,5 +45,10 @@ namespace TestMod
             // Register the new module type
             moduleList.add(testModuleType);
         }
+
+        public override ICollection<string> GetContributors()
+        {
+            return new[] { "solidDoWant" };
+        }
     }
 }
