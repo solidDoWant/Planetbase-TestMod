@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <strings>
 	<string name="test">Test module</string>
+	<string name="component_test_component_type">Test component</string>
 </strings>
 </xml>

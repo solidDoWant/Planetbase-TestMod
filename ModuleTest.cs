@@ -29,7 +29,6 @@ namespace TestMod
         {
             base.deserialize(node);
             PowerGenerationMultiplier = Serialization.deserializeFloat(node[GenerationMultiplierTagName]);
-            Debug.Log($"Deserialized multiplier of {PowerGenerationMultiplier}");
         }
 
         public override int getMaxPowerGeneration()
@@ -44,6 +43,10 @@ namespace TestMod
 
         public override void update(float timeStep, long frameIndex)
         {
+            // This is important. If the base update function is not called then many game functions will not
+            // work properly.
+            base.update(timeStep, frameIndex);
+            
             // Only update every UpdatePeriodSeconds
             TimeSinceLastUpdate += timeStep;
             if (TimeSinceLastUpdate < UpdatePeriodSeconds)
@@ -51,7 +54,6 @@ namespace TestMod
 
             TimeSinceLastUpdate = 0;
             OxygenGenerationMultiplier = Random.value * 10;
-            Debug.Log($"Updated oxygen generation multiplier to {OxygenGenerationMultiplier}");
         }
     }
 }

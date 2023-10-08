@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using Planetbase;
 using PlanetbaseFramework;
 using PlanetbaseFramework.GameMechanics.Buildings;
+using PlanetbaseFramework.GameMechanics.Components;
 using UnityEngine;
 
 namespace TestMod
@@ -15,7 +16,20 @@ namespace TestMod
 
         public override void Init()
         {
+            RegisterNewComponentTypes();    // This should be called before registering modules types that may reference the new component types
             RegisterNewModuleTypes();
+        }
+
+        public void RegisterNewComponentTypes()
+        {
+            // Build the new component model
+            var componentModel = new ComponentModelBuilder()
+                .AddMeshObject(ComponentModelBuilder.AddCollisionGeometryRecursively(ModObjects.FindObjectByFilename("test.obj")))
+                .GenerateObject();
+            componentModel.transform.localScale = 0.5f * Vector3.one;   // Reduce the size to 1/8th the original volume (0.5 ^ (number of dimensions, 3))
+
+            // Create the new component type and register it
+            ComponentTypeList.getInstance().add(new TestComponentType(ModTextures.FindTextureWithName("icon.png"), componentModel));
         }
 
         public void RegisterNewModuleTypes()
@@ -43,10 +57,8 @@ namespace TestMod
             var testModuleType = new ModuleTypeTest(ModTextures.FindTextureWithName("icon.png"), models.ToArray());
 
             // This is a global Planetbase object that contains all the ModuleTypes that players can choose from
-            var moduleList = TypeList<ModuleType, ModuleTypeList>.getInstance();
-
             // Register the new module type
-            moduleList.add(testModuleType);
+            ModuleTypeList.getInstance().add(testModuleType);
         }
 
         public override ICollection<string> GetContributors()

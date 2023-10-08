@@ -21,6 +21,10 @@ namespace TestMod
             mRequiredStructure.set<ModuleTypeOxygenGenerator>();    // This controls what structure is required to be built before this one may be placed
             mFlags = FlagDome + FlagLightAtNight + FlagWalkable;    // Flags control misc. properties of the module
             mLayoutType = LayoutType.Circular;                      // This controls where colonists will path
+            mComponentTypes = new[]                                 // These are the components that can be built in the module. To specify different components for each size, use mComponentTypesSizes
+            {
+                ComponentTypeList.find<TestComponentType>()
+            };
         }
 
         public override ResourceAmounts calculateCost(int sizeIndex)
