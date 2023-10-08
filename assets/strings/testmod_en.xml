@@ -2,5 +2,6 @@
 <strings>
 	<string name="test">Test module</string>
 	<string name="component_test_component_type">Test component</string>
+	<string name="test_resource_type">Test resource</string>
 </strings>
 </xml>

@@ -2,8 +2,10 @@
 using System.Collections.Generic;
 using Planetbase;
 using PlanetbaseFramework;
+using PlanetbaseFramework.Extensions;
 using PlanetbaseFramework.GameMechanics.Buildings;
 using PlanetbaseFramework.GameMechanics.Components;
+using PlanetbaseFramework.GameMechanics.Resources;
 using UnityEngine;
 
 namespace TestMod
@@ -16,8 +18,25 @@ namespace TestMod
 
         public override void Init()
         {
+            RegisterNewResourceTypes();     // This should be called before registering component types that may reference the new resource types
             RegisterNewComponentTypes();    // This should be called before registering modules types that may reference the new component types
             RegisterNewModuleTypes();
+        }
+
+        public void RegisterNewResourceTypes()
+        {
+            ResourceTypeList.find<Metal>().loadModel().Log();
+
+            var model = new ResourceModelBuilder()
+                .AddMeshObject(
+                    ResourceModelBuilder.AddCollisionGeometryRecursively(ModObjects.FindObjectByFilename("test.obj"))
+                )
+                .GenerateObject();
+            model.transform.localScale = 0.25f * Vector3.one;
+
+            // Important: the `addResource` method must be used, not the `add` method. For some reason the game developer created a second function that
+            // does what the first one should, rather than overriding the parent's `add` function.
+            ResourceTypeList.getInstance().addResource(new TestResourceType(ModTextures.FindTextureWithName("icon.png"), model));
         }
 
         public void RegisterNewComponentTypes()

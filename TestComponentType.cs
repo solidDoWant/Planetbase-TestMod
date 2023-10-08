@@ -19,7 +19,11 @@ namespace TestMod
             mMaxUsageTime = 30f;                                            // How long this can be used before the character must go do something else, in seconds
             mUsageCooldown = 120f;                                          // How long the character must wait before using one of these components again, in seconds
             mFlags = FlagNoPowerNeeded + FlagQuadrantAutoRotation + FlagRequiresTracksuit + FlagRequiresUncoveredHead + FlagHydrating;
-            mRadius = 0.75f;    // This is used in several places to determine the distance at which two things should interact, such as the distance that the player must be within to use the component.
+            mRadius = 0.75f;                                                // This is used in several places to determine the distance at which two things should interact,
+                                                                            // such as the distance that the player must be within to use the component.
+            mResourceProductionPeriod = 300f;                               // How long it takes to produce one of the produced resources, in seconds
+            mPowerGeneration = -150;                                        // How much power the component generates (if positive) or consumes (if negative)
+            AddResourceProduction<TestResourceType>(2);               // What resource and how many that will be produced every production period
         }
     }
 }
